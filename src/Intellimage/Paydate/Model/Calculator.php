@@ -4,6 +4,7 @@ namespace Intellimage\Paydate\Model;
 
 use Intellimage\Paydate\Exception\InvalidInput;
 use DateTime;
+use DateInterval;
 
 class Calculator
 {
@@ -76,6 +77,64 @@ class Calculator
     public function getAmount()
     {
         return $this->_amount;
+    }
+    
+    /**
+     * returns the from date
+     * @return DateTime
+     */
+    private function _getFromDateTime()
+    {
+        return DateTime::createFromFormat('Ym', $this->_from);
+    }
+    
+    /**
+     * returns the dates for the payment dates for each calculated month
+     * @return \Intellimage\Paydate\Model\Calculator
+     * @return array of dates
+     */
+    public function calculate()
+    {
+        if (!$this->_amount || !$this->_from) {
+            throw new InvalidInput ("Please setup amount and from date");
+        }
+        
+        $from = $this->_getFromDateTime();
+        $amount = $this->_amount;
+        $return = array();
+        
+        while ($amount--) {
+            
+            $name = $from->format('F Y');
+            
+            $from = DateTime::createFromFormat('Ymd', $from->format('Ym') . 15);
+            
+            $bonusDate = $from->format('Ymd');
+            if ($from->format('N') > 5) {
+                $from->add(new DateInterval('P' . (4 - ($from->format('N') - 6)) . 'D'));
+                $bonusDate = $from->format('Ymd');
+            }
+            
+            $from->add(new DateInterval("P1M"));
+            $from = DateTime::createFromFormat('Ymd', $from->format('Ym') . 1);
+            $from->sub(new DateInterval("P1D"));
+            $salaryDate = $from->format('Ymd');
+            if ($from->format('N') > 5) {
+                $from->sub(new DateInterval('P' . ($from->format('N') - 5) . 'D'));
+                $salaryDate = $from->format('Ymd');
+            }
+            
+            $array[] = array(
+                $name,
+                $salaryDate,
+                $bonusDate
+            );
+            
+            $from->sub(new DateInterval("P" . ($from->format('d') - 1) . "D"));
+            $from->add(new DateInterval("P1M"));
+        }
+        
+        return $array;
     }
     
 }

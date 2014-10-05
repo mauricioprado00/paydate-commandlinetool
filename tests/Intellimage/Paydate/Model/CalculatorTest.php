@@ -109,4 +109,122 @@ class CalculatorTest extends \PHPUnit_Framework_TestCase
         );
     }
     
+    public function testRunUninitializedFrom()
+    {
+        $this->setExpectedException('\Intellimage\Paydate\Exception\InvalidInput');
+        $mock = $this->mockCalculator();
+        $mock->setAmount(1);
+        
+        $mock->calculate();
+    }
+    
+    public function testRunUninitializedAmount()
+    {
+        $this->setExpectedException('\Intellimage\Paydate\Exception\InvalidInput');
+        $mock = $this->mockCalculator();
+        $mock->setFromMonth('201412');
+        
+        $mock->calculate();
+    }
+    
+    /**
+     * @dataProvider amountOfReturnedRowsProvider
+     */
+    public function testAmountOfReturnedRows($amount)
+    {
+        $mock = $this->mockCalculator();
+        $mock->setFromMonth('201412')
+            ->setAmount($amount);
+        
+        $result = $mock->calculate();
+        
+        $this->assertCount($amount, $result);
+    }
+    
+    public function amountOfReturnedRowsProvider()
+    {
+        $params = array();
+        
+        for ($i = 1; $i < 100; $i++) {
+            $params[] = array($i);
+        }
+        
+        return $params;
+    }
+    
+    /**
+     * @dataProvider testMonthNamesProvider
+     */
+    public function testMonthNames($month, $monthNames)
+    {
+        $mock = $this->mockCalculator();
+        $mock->setFromMonth($month)
+            ->setAmount(count($monthNames));
+        
+        $result = $mock->calculate();
+        
+        foreach ($result as $idx => $row) {
+            $this->assertEquals($monthNames[$idx], $row[0]);
+        }
+        
+    }
+    
+    public function testMonthNamesProvider()
+    {
+        return array(
+            array('201401', array('January 2014', 'February 2014', 'March 2014', 'April 2014')),
+            array('201405', array('May 2014', 'June 2014', 'July 2014', 'August 2014')),
+        );
+    }
+    
+    /**
+     * @dataProvider testBonusDatesProvider
+     */
+    public function testBonusDates($month, $dates)
+    {
+        $mock = $this->mockCalculator();
+        $mock->setFromMonth($month)
+            ->setAmount(count($dates));
+        
+        $result = $mock->calculate();
+        
+        foreach ($result as $idx => $row) {
+            $this->assertEquals($dates[$idx], $row[2]);
+        }
+        
+    }
+    
+    public function testBonusDatesProvider()
+    {
+        return array(
+            array('201401', array('20140115', '20140219', '20140319', '20140415')),
+            array('201405', array('20140515', '20140618', '20140715', '20140815')),
+        );
+    }
+    
+    /**
+     * @dataProvider testSalaryDatesProvider
+     */
+    public function testSalaryDates($month, $dates)
+    {
+        $mock = $this->mockCalculator();
+        $mock->setFromMonth($month)
+            ->setAmount(count($dates));
+        
+        $result = $mock->calculate();
+        
+        foreach ($result as $idx => $row) {
+            $this->assertEquals($dates[$idx], $row[1]);
+        }
+        
+    }
+    
+    public function testSalaryDatesProvider()
+    {
+        return array(
+            array('201401', array('20140131', '20140228', '20140331', '20140430')),
+            array('201405', array('20140530', '20140630', '20140731', '20140829')),
+        );
+    }
+    
 }
