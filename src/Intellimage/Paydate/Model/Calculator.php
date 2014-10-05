@@ -7,9 +7,16 @@ use DateTime;
 
 class Calculator
 {
-    
+    /**
+     * date from where to calculate
+     * @var string
+     */
     private $_from = null;
     
+    /**
+     * amount of months to calculate
+     * @var int
+     */
     private $_amount = null;
     
     /**
@@ -70,4 +77,6 @@ class Calculator
     {
         return $this->_amount;
     }
+    
+    
 }

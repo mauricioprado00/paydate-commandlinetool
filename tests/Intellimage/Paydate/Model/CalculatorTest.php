@@ -44,12 +44,14 @@ class CalculatorTest extends \PHPUnit_Framework_TestCase
      * test that the values are set
      * @dataProvider validMonthsProvider
      */
-    public function testSetValidMonth($month)
+    public function testSetValidMonth($month, $expected = null)
     {
         $mock = $this->mockCalculator();
         $mock->setFromMonth($month);
         
-        $this->assertEquals($month, $mock->getFromMonth(), "The from month set should be the same as the provided");
+        $expected = isset($expected) ? $expected : $month;
+        
+        $this->assertEquals($expected, $mock->getFromMonth(), "The from month set should be the same as the provided");
     }
     
     public function validMonthsProvider()
@@ -58,6 +60,7 @@ class CalculatorTest extends \PHPUnit_Framework_TestCase
             array('201412'),
             array('201512'),
             array('196901'),
+            array('now', date('Ym'))
         );
     }
     
