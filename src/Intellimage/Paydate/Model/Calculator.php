@@ -61,7 +61,7 @@ class Calculator
     public function setAmount($amount)
     {
         
-        if (!preg_match('(^[0-9]+$)', $amount)) {
+        if (!preg_match('(^[0-9]+$)', $amount) || intval($amount) <= 0) {
             throw new InvalidInput("Invalid amount provided: " . $amount);
         }
         
@@ -77,6 +77,5 @@ class Calculator
     {
         return $this->_amount;
     }
-    
     
 }

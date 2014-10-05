@@ -81,6 +81,7 @@ class CalculatorTest extends \PHPUnit_Framework_TestCase
     {
         return array(
             array(-1),
+            array(0),
             array("one"),
             array("1.5"),
         );
