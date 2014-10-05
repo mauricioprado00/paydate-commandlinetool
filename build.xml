@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<project name="magento extension" default="build" basedir=".">
+    <property name="build-exclude-file" value=".build-exclude" />
+    <property name="locale.dir" value="app/locale" />
+    <property file="${basedir}/build.properties" />
+    <property file="${basedir}/build.default.properties" />
+    <property environment="env" />
+    
+    <target name="test">
+        <exec dir="${basedir}" executable="./bin/composer/phpunit" failonerror="true" >
+            <arg value="${test-dir}" />
+        </exec>
+    </target>
+
+</project>

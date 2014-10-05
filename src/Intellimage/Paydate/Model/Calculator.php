@@ -65,7 +65,7 @@ class Calculator
             throw new InvalidInput("Invalid amount provided: " . $amount);
         }
         
-        $this->_amount = $amount;
+        $this->_amount = intval($amount);
         return $this;
     }
     
