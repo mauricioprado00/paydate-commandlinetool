@@ -46,6 +46,11 @@ class CalculateController extends AbstractActionController
      */
     const DEFAULT_DATE_FORMAT = 'Ymd';
     
+    /**
+     * default month format
+     */
+    const DEFAULT_MONTH_FORMAT = 'F Y';
+    
     public function calculateAction()
     {
         $request = $this->getRequest();
@@ -58,7 +63,8 @@ class CalculateController extends AbstractActionController
 
             $calculator->setFromMonth($parameters->get("from", self::DEFAULT_FROM))
                 ->setAmount($parameters->get('months', self::DEFAULT_MONTHS))
-                ->setDateFormat($parameters->get('date-format', self::DEFAULT_DATE_FORMAT));
+                ->setDateFormat($parameters->get('date-format', self::DEFAULT_DATE_FORMAT))
+                ->setMonthFormat($parameters->get('month-format', self::DEFAULT_MONTH_FORMAT));
             
             $csv = new Csv();
             $csv->setDelimiter($parameters->get('delimiter', self::CSV_DELIMITER))

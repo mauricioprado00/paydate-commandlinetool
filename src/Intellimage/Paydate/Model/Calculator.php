@@ -27,6 +27,12 @@ class Calculator
     private $_dateFormat = 'Ymd';
     
     /**
+     * month format
+     * @var string
+     */
+    private $_monthFormat = 'F Y';
+    
+    /**
      * sets the from date from where calculate the paydates
      * @param string $from format yyyymm
      * @return \Intellimage\Paydate\Model\Calculator
@@ -97,6 +103,17 @@ class Calculator
     }
     
     /**
+     * Sets the month format
+     * @param string $format
+     * @return \Intellimage\Paymonth\Model\Calculator
+     */
+    public function setMonthFormat($format)
+    {
+        $this->_monthFormat = $format;
+        return $this;
+    }
+    
+    /**
      * returns the from date
      * @return DateTime
      */
@@ -122,7 +139,7 @@ class Calculator
         
         while ($amount--) {
             
-            $name = $from->format('F Y');
+            $name = $from->format($this->_monthFormat);
             
             $from = DateTime::createFromFormat('Ymd', $from->format('Ym') . 15);
             
