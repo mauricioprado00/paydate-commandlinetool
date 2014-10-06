@@ -2,7 +2,7 @@
 
 namespace Test\Intellimage\Paydate\Model;
 
-use Intellimage\Paydate\Exception\InvalidInput;
+use \Intellimage\Paydate\Exception\InvalidInput;
 use \Intellimage\Paydate\Model\Calculator;
 
 class CalculatorTest extends \PHPUnit_Framework_TestCase
