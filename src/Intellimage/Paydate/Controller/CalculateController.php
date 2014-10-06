@@ -41,6 +41,11 @@ class CalculateController extends AbstractActionController
      */
     const CSV_HEADERS = 'Month,Salary Payment Date,Bonus Payment Date';
     
+    /**
+     * default date format used for payment dates if none provided
+     */
+    const DEFAULT_DATE_FORMAT = 'Ymd';
+    
     public function calculateAction()
     {
         $request = $this->getRequest();
@@ -51,9 +56,9 @@ class CalculateController extends AbstractActionController
         try {
             $calculator = new Calculator();
 
-            $calculator->setFromMonth($parameters->get("from", self::DEFAULT_FROM));
-            
-            $calculator->setAmount($parameters->get('months', self::DEFAULT_MONTHS));
+            $calculator->setFromMonth($parameters->get("from", self::DEFAULT_FROM))
+                ->setAmount($parameters->get('months', self::DEFAULT_MONTHS))
+                ->setDateFormat($parameters->get('date-format', self::DEFAULT_DATE_FORMAT));
             
             $csv = new Csv();
             $csv->setDelimiter($parameters->get('delimiter', self::CSV_DELIMITER))

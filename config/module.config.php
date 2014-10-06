@@ -1,7 +1,7 @@
 <?php
 
 $global = ' ';
-$global_after = ' [--to-file=] [--delimiter=] [--enclose=]';
+$global_after = ' [--to-file=] [--delimiter=] [--enclose=] [--date-format=]';
 
 return array(
     'Paydate' => array(

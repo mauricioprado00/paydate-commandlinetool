@@ -21,6 +21,12 @@ class Calculator
     private $_amount = null;
     
     /**
+     * date format used for payment dates
+     * @var string
+     */
+    private $_dateFormat = 'Ymd';
+    
+    /**
      * sets the from date from where calculate the paydates
      * @param string $from format yyyymm
      * @return \Intellimage\Paydate\Model\Calculator
@@ -30,7 +36,7 @@ class Calculator
     {
         if ($from === 'now') {
             $this->_from = date('Ym');
-            return true;
+            return $this;
         }
         
         $date = DateTime::createFromFormat('Ym', $from);
@@ -80,6 +86,17 @@ class Calculator
     }
     
     /**
+     * Sets the date format used for payment dates
+     * @param string $format
+     * @return \Intellimage\Paydate\Model\Calculator
+     */
+    public function setDateFormat($format)
+    {
+        $this->_dateFormat = $format;
+        return $this;
+    }
+    
+    /**
      * returns the from date
      * @return DateTime
      */
@@ -109,20 +126,18 @@ class Calculator
             
             $from = DateTime::createFromFormat('Ymd', $from->format('Ym') . 15);
             
-            $bonusDate = $from->format('Ymd');
             if ($from->format('N') > 5) {
                 $from->add(new DateInterval('P' . (4 - ($from->format('N') - 6)) . 'D'));
-                $bonusDate = $from->format('Ymd');
             }
+            $bonusDate = $from->format($this->_dateFormat);
             
             $from->add(new DateInterval("P1M"));
             $from = DateTime::createFromFormat('Ymd', $from->format('Ym') . 1);
             $from->sub(new DateInterval("P1D"));
-            $salaryDate = $from->format('Ymd');
             if ($from->format('N') > 5) {
                 $from->sub(new DateInterval('P' . ($from->format('N') - 5) . 'D'));
-                $salaryDate = $from->format('Ymd');
             }
+            $salaryDate = $from->format($this->_dateFormat);
             
             $array[] = array(
                 $name,

@@ -93,6 +93,7 @@ class Module implements ConsoleUsageProviderInterface, AutoloaderProviderInterfa
             array('[--to-file=]', 'if not specified the csv is delivered in the console stdout. '),
             array('[--delimiter=]', 'if not specified comma (,) is used.'),
             array('[--enclose=]', 'if not specified double quote (") is used.'),
+            array('[--date-format=]', 'format used for payment dates. If not specified "Ymd" is used.'),
             
             'Examples', 
             
@@ -101,6 +102,9 @@ class Module implements ConsoleUsageProviderInterface, AutoloaderProviderInterfa
             
             'Calculate next 12 months paydates to file:',
             'calculate --to-file="/tmp/next_paydates.csv"'     => 'generates next 12 months paydates from not to the console output',
+            
+            'Calculate next 12 months paydates to file with date formats as 2014/05/01:',
+            'calculate --date-format="Y/m/d"'     => 'generates next 12 months paydates from not to the console output',
             
             'Calculate next 24 months paydates:',
             'calculate next 24'     => 'generates next 24 months paydates from now to the console output',
