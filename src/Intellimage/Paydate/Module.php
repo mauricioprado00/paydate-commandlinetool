@@ -92,7 +92,7 @@ class Module implements ConsoleUsageProviderInterface, AutoloaderProviderInterfa
             'Additional parameters:',
             array('[--to-file=]', 'if not specified the csv is delivered in the console stdout. '),
             array('[--delimiter=]', 'if not specified comma (,) is used.'),
-            array('[--quote=]', 'if not specified double quote (") is used.'),
+            array('[--enclose=]', 'if not specified double quote (") is used.'),
             
             'Examples', 
             
