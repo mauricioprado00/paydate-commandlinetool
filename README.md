@@ -1,22 +1,6 @@
 Paydate Commandline Tool
 =======
 
-https://github.com/mauricioprado00/the-burroughs-test
-
-Description of the application
-------------------------------
-
-Is a code sample written by Hugo Mauricio Prado Macat  that complies as a solution for the description of "The Burroughs Test" for the recruitment process in order to demonstrate professional experience software engineering principles.
-
-Description of the test:
-
-Small command-line utility to help a fictional company determine the dates on which they need to pay salaries to their Sales Department.
-
-The company handles their Sales payroll in the following way:
-
-* Sales staff get a regular fixed base monthly salary, plus a monthly bonus 
-* The base salaries are paid on the last day of the month, unless that day is a Saturday, a Sunday (weekend). In that case, salaries are paid before the weekend. For the sake of this application,  please do not take into account public holidays. 
-* On the 15th of every month bonuses are paid for the previous month, unless that day is a weekend. In that case, they are paid the first Wednesday after the 15th
 
 ![alt tag](https://raw.github.com/mauricioprado00/the-burroughs-test/master/diagram.png)
 
