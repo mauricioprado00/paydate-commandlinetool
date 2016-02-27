@@ -1,7 +1,6 @@
 Paydate Commandline Tool
 =======
 
-
 ![alt tag](https://raw.github.com/mauricioprado00/the-burroughs-test/master/diagram.png)
 
 
@@ -45,4 +44,3 @@ to run the test cases you can do it either with ant
 or by specifying the directory:
 
    ./bin/composer/phpunit tests
-
