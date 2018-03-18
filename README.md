@@ -1,7 +1,7 @@
 Paydate Commandline Tool
 =======
 
-![alt tag](https://raw.github.com/mauricioprado00/the-burroughs-test/master/diagram.png)
+![alt tag](https://raw.github.com/mauricioprado00/paydate-commandlinetool/master/diagram.png)
 
 
 Installation / run
